@@ -1,0 +1,22 @@
+{
+  "name": "morse",
+  "version": "0.1.0",
+  "description": "Morse Code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhinrichsen/morse.git"
+  },
+  "author": "Jochen Hinrichsen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jhinrichsen/morse/issues"
+  },
+  "homepage": "https://github.com/jhinrichsen/morse#readme",
+  "dependencies": {
+    "chai": "^3.4.1"
+  }
+}

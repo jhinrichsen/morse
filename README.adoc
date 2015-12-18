@@ -1,2 +1,7 @@
 = morse
-Morse code
+
+Well, actually it is not the real Morse used back in those days, but the ITU
+M.1677 : International Morse code. 
+
+[http://www.itu.int/rec/R-REC-M.1677-1-200910-I/]
+[http://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.1677-1-200910-I!!PDF-E.pdf]
