@@ -5,3 +5,5 @@ M.1677 : International Morse code.
 
 [http://www.itu.int/rec/R-REC-M.1677-1-200910-I/]
 [http://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.1677-1-200910-I!!PDF-E.pdf]
+
+Work in progress. Your mileage may vary.
