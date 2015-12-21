@@ -1,5 +1,5 @@
 {
-  "name": "morse",
+  "name": "@jhinrichsen/morse",
   "version": "0.1.0",
   "description": "Morse Code",
   "main": "index.js",
