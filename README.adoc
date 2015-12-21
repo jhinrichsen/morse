@@ -1,9 +1,69 @@
 = morse
 
-Well, actually it is not the real Morse used back in those days, but the ITU
-M.1677 : International Morse code. 
-
-[http://www.itu.int/rec/R-REC-M.1677-1-200910-I/]
-[http://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.1677-1-200910-I!!PDF-E.pdf]
+Implements ITU M.1677 : International Morse code.
 
 Work in progress. Your mileage may vary.
+
+=== Why yet another Morse library?
+
+NPM reveals a load of existing Morse code libraries, but
+
+- `ecto/morse` does not support transmission signals, only `.--.` notation
+- dito for `jarofghosts/morse-stream`
+- `skattyadz/node-morse-code` is bound to Arduino/ events
+- `joeLepper/morse-maker` is based on keyboard events, and a flashing PI
+- `ryanseys/tessel-morse` ... well, here i stopped and started coding
+
+=== What's that transmission thing again?
+
+Morse code is a two way transformation from text to dots and spaces notation.
+The letter 'A' e.g. is represented as `.-`, and vice versa.
+But if you want to transmit this information, be it via air
+(sound or light), copper (electricity), or any other medium,
+you need a pulse and a signal/ no signal.
+At its heart, Morse code is a digital signal (on or off).
+
+----
+on     +---+   +-----------+
+       |   |   |           |                    <1>
+off   -+   +---+           +-----------
+
+pulse ---+---+---+---+---+---+---+---+---> t
+----
+
+<1> Transmission signal for letter 'A'
+
+==== Prerequisites
+
+- Node.js >= 4.x (ES2015 support)
+- npm
+
+=== Installation
+
+----
+npm install @jhinrichsen/morse
+----
+
+=== Use
+
+----
+const morse = require('morse');
+
+morse.encode('The quick brown fox jumps over the lazy dog'); <1>
+// A String with lots of dots and dashes
+
+morse.signal('The quick brown fox jumps over the lazy dog'); <2>
+// An array with lots of boolean values true and false
+----
+<1> encode :: String -> String
+<2> signal :: String -> [Bool]
+
+=== To do list
+
+- Decoding
+- Make implementation indepent of type String (support streams e.a.)
+- Maybe support Samuel Morse's original version
+
+=== Specifications
+
+ITU [http://www.itu.int/rec/R-REC-M.1677-1-200910-I/]
