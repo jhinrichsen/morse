@@ -47,7 +47,7 @@ npm install @jhinrichsen/morse
 === Use
 
 ----
-const morse = require('morse');
+const morse = require('@jhinrichsen/morse');
 
 morse.encode('The quick brown fox jumps over the lazy dog'); <1>
 // A String with lots of dots and dashes
@@ -62,7 +62,7 @@ morse.signal('The quick brown fox jumps over the lazy dog'); <2>
 
 - Decoding
 - Make implementation indepent of type String (support streams e.a.)
-- Maybe support Samuel Morse's original version
+- Maybe support Samuel Morse's original version, just to allow pluggable tables
 
 === Specifications
 
