@@ -3,8 +3,8 @@
 // As Morse code is a digital protocol at the bottom (signal / no signal), it
 // is represented using true (signal) and false (no signal).
 
-const assert = require('chai').assert
-const expect = require('chai').expect
+const assert = require('chai').assert;
+const expect = require('chai').expect;
 
 const table = {
   'a': '.-',
@@ -48,17 +48,35 @@ const table = {
   // TODO Add punctuation from 1.1.3
 };
 
-const e = table['e'];
-expect(e).to.equal('.')
-const _7 = table['7'];
-expect(_7).to.equal('--...')
+expect(table.e).to.equal('.');
+expect(table['7']).to.equal('--...');
 
-// :: String -> String
-const encodeChar = function (c) {
-  return table[c]
-}
+// Representation of a long 'dah'
+const dah = '-';
 
-expect(encodeChar('a')).to.equal('.-')
+// Representation of a short 'dit'
+const dit = '.';
+
+// Representation of pause/ break/ nothing
+const pause = ' ';
+
+// Return true if character is a long 'dah' in morse notation.
+// :: String[1] -> Boolean
+const isDah = function (c) {
+  return dah === c;
+};
+
+expect(isDah(dah)).to.be.true;
+expect(isDah(dit)).to.be.false;
+
+// Return true if character is a short 'dit' in morse notation.
+// :: String[1] -> Boolean
+const isDit = function (c) {
+  return dit === c;
+};
+
+expect(isDit(dit)).to.be.true;
+expect(isDit(dah)).to.be.false;
 
 // 2.1 A dash is equal to three dots.
 // :: Int
@@ -73,69 +91,80 @@ const symbolDotRatio = 1;
 // :: Int
 const letterDotRatio = 3;
 
-// 2.4 The space between two words is equal to seven dots.
-// :: Int
-const wordDotRatio = 3;
+// 2.4: The space between two words is equal to seven dots.
+const wordDotRatio = 7;
 
-// Return true if character is a dot in morse notation.
-// :: String[1] -> Boolean
-const isDot = function (c) {
-  return '.' === c;
-}
-expect(isDot('.')).to.be.true;
-expect(isDot('-')).to.be.false;
-
-// Convert from morse notation ('.' and '-') into a bit pulse (true and false).
-// :: String[1] -> [Boolean]
-const encode = function(morse) {
-  assert.equal(1, morse.length);
-  return (isDot(morse)
-    ? [ true ]
-    // 2.1 
-    : Array.apply(null, new Array(dashDotRatio)).map(_ => true))
-    // 2.2
-    // This hardcoded array does not take symbolDotRatio into account.
-    // Once Morse itself changes, i need to update the next line...
-    // push() returns the last index pushded to, which will be the return value
-    // of the function - bad
-    // .push(false);
-    .concat([ false ])
-}
-expect(encode('.')).to.be.an('array');
-expect(encode('.')).to.have.length(2);
-expect(encode('.')).to.eql([ true, false ]);
-
+// Utility: Flatten array
 // :: [a] -> [b]
 const flatten = function (as) {
   return [].concat.apply([], as);
+};
+
+// Utility: Create array of length n, and prepopulate with d
+// :: a -> Number -> [a]
+const mkArray = function (d, n) {
+  return Array.apply(null, new Array(n)).map(_ => d);
+};
+
+expect(mkArray(true, 2)).to.be.eql([true, true]);
+expect(mkArray(0, 3)).to.be.eql([0, 0, 0]);
+
+const mkPause = function (n) {
+  return mkArray(' ', n).join('');
+}
+expect(mkPause(2)).to.equal('  ');
+
+// Encode a character text into morse.
+// :: String[1] -> String
+const encodeLetter = function (c) {
+  return table[c];
+};
+
+expect(encodeLetter('a')).to.equal('.-');
+
+// Encode a word into morse.
+// :: String -> String
+const encodeWord = function(s) {
+  // HERE const separator = mkPause(3);
+  const separator = mkPause(1);
+  return s.split('').map(encodeLetter).join(separator);
 }
 
-const encodeLetter = function(morse) {
-  return flatten(morse.split('').map(encode))
+expect(encodeWord('ee')).to.equal('. .');
+
+// Encode text into morse.
+// Follows ITU spec 2.4: The space between two words is equal to seven dots.
+// TODO Using a String is suboptimal, because it hardcodes the underlying buffer
+// resp. transport representation (could be file based, stream based, ...).
+// :: String -> String
+const encode = function (s) {
+  // HERE const separator = mkPause(wordDotRatio);
+  const separator = mkPause(3);
+  return s
+    .toLowerCase()
+    .split(' ')
+    .map(encodeWord)
+    .join(separator);
 }
 
-console.log(encodeLetter('--...'));
-expect(encodeLetter('--...')).to.eql([ true, true, true, false, 
-    true, true, true, false, 
-    true, false,
-    true, false,
-    true, false
-  ]);
+expect(encode('morse code')).to.equal('-- --- .-. ... .   -.-. --- -.. .');
+expect(encode('FREIE ENZYKLOPAEDIE'))
+    .to
+    .equal('..-. .-. . .. .   . -. --.. -.-- -.- .-.. --- .--. .- . -.. .. .');
 
-// Convert a morse bit into Wikipedia Notation, i.e. '=' for true and '.' for
-// false.
-// :: boolean -> String[1]
-const wikipediaNotation = function (b) {
-  return b ? '=' : '.'
-}
-expect([ true, true, false, true, false ]
-    .map(wikipediaNotation)
+// Convert morse into time notation, where short is represented as '.' and
+// a long '-' as '='.
+// Characters other than 'dit' and 'dah' are represented as '?'.
+// :: String[1] -> String[1]
+const timeNotation = function (b) {
+  return isDit(b) ? '.' : (isDah(b) ? '=' : '?');
+};
+expect(table.c
+    .split('')
+    .map(timeNotation)
     .join(''))
-  .to.equal('==.=.')
+  .to.equal('=.=.');
 
-const s1 = encodeLetter('morse code')
-const s2 = '===.===...===.===.===...=.===.=...=.=.=...=' +
-  '.......===.=.===.=...===.===.===...===.=.=...='
-expect(s1).to.equal(s2);
-
+const s3 = '===.===...===.===.===...=.===.=...=.=.=...=' +
+  '.......===.=.===.=...===.===.===...===.=.=...=';
 // EOF
