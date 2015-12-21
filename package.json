@@ -1,6 +1,6 @@
 {
   "name": "@jhinrichsen/morse",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Morse Code",
   "main": "index.js",
   "scripts": {
