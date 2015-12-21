@@ -46,9 +46,33 @@ const table = {
   '7': '--...',
   '8': '---..',
   '9': '----.',
-  '0': '-----'
+  '0': '-----',
 
-  // TODO Add punctuation from 1.1.3
+  '.': '.-.-.-',
+  ',': '--..--',
+  ':': '---...',
+  '?': '..--..',
+  '\'': '.----.',
+  '-': '-....-',
+  '/': '-..-.',
+  '(': '-.--.',
+  ')': '-.--.-',
+  '"': '.-..-.',
+  '=': '-...-',
+  '+': '.-.-.',
+  '*': '-..-',
+  '@': '.--.-.'
+
+};
+
+const controlTable = {
+  'understood': '...-.',
+  'error': '........',
+  'invitation_to_transmit': '-.-',
+  'wait': '.-...',
+  'end_of_work': '...-.-', 
+  // To precede every transmission
+  'start': '-.-.-'
 };
 
 expect(table.e).to.equal('.');
@@ -133,7 +157,7 @@ expect(encodeWord('ee')).to.equal('. .');
 // TODO Using a String is suboptimal, because it hardcodes the underlying buffer
 // resp. transport representation (could be file based, stream based, ...).
 // :: String -> String
-const encode = s => {
+const encode = exports.encode = s => {
   return s
     .toLowerCase()
     .split(' ')
@@ -160,7 +184,7 @@ expect(wikipediaNotation([ true, true, false ])).to.eql('=', '_', '=');
 
 // Convert a text into a signal (on/ off).
 // :: String -> [Boolean]
-const signal = s => {
+const signal = exports.signal = s => {
   // ECMAScripts Array.prototype.join() does not offer anything other than
   // Strings, so instead of boolean true and false the implementation is based
   // on characters '0' and '1'.
