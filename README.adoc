@@ -61,6 +61,7 @@ morse.signal('The quick brown fox jumps over the lazy dog'); <2>
 === To do list
 
 - Decoding
+- Add Travis integration
 - Make implementation indepent of type String (support streams e.a.)
 - Maybe support Samuel Morse's original version, just to allow pluggable tables
 
