@@ -1,6 +1,7 @@
 = morse
 
-image::https://img.shields.io/badge/ES-2015-brightgreen.svg[ES2015, link=http://www.ecma-international.org/ecma-262/6.0/index.html]  image::https://travis-ci.org/jhinrichsen/morse.svg?branch=master[Travis build status]
+image::https://img.shields.io/badge/ES-2015-brightgreen.svg[ES2015, link=http://www.ecma-international.org/ecma-262/6.0/index.html]  
+image::https://travis-ci.org/jhinrichsen/morse.svg?branch=master[Travis build status]
 
 Implements ITU M.1677 : International Morse code.
 
