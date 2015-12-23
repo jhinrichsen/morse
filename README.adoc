@@ -72,3 +72,4 @@ morse.signal('The quick brown fox jumps over the lazy dog'); <2>
 === Specifications
 
 ITU [http://www.itu.int/rec/R-REC-M.1677-1-200910-I/]
+
