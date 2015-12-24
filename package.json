@@ -4,7 +4,8 @@
   "description": "Morse Code",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test.js"
+    "test": "mocha test.js",
+    "lint": "jshint index.js"
   },
   "repository": {
     "type": "git",
