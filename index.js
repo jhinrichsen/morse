@@ -165,11 +165,6 @@ const encode = exports.encode = s => {
     .join(mkPause(3));
 };
 
-expect(encode('morse code')).to.equal('-- --- .-. ... .   -.-. --- -.. .');
-expect(encode('FREIE ENZYKLOPAEDIE'))
-    .to
-    .equal('..-. .-. . .. .   . -. --.. -.-- -.- .-.. --- .--. .- . -.. .. .');
-
 ////////////////////////////////////////////////////////////////////////////////
 //
 // Signal functions
@@ -224,12 +219,6 @@ const signal = exports.signal = s => {
     .split('')
     .map(c => { return c === on ? true : false; });
 };
-
-expect(signal('e')).to.eql([true]);
-expect(signal('ee')).to.eql([ 
-    true, 
-    false, false, false, // letter separator
-    true ]);
 
 expect(signal('morse code')
     .map(wikipediaNotation)
