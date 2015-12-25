@@ -89,7 +89,7 @@ const pause = ' ';
 
 // Return true if character is a long 'dah' in morse notation.
 // :: String[1] -> Boolean
-const isDah = c => { return dah === c; };
+const isDah = c => dah === c;
 
 // Avoid .to.be.true because linter will complain about expression
 expect(isDah(dah)).to.equal(true);
@@ -97,9 +97,7 @@ expect(isDah(dit)).to.equal(false);
 
 // Return true if character is a short 'dit' in morse notation.
 // :: String[1] -> Boolean
-const isDit = function (c) {
-  return dit === c;
-};
+const isDit = c => dit === c;
 
 expect(isDit(dit)).to.equal(true);
 expect(isDit(dah)).to.equal(false);
@@ -122,23 +120,21 @@ const wordDotRatio = 7;
 
 // Utility: Flatten array
 // :: [a] -> [b]
-const flatten = as => { return [].concat.apply([], as); };
+const flatten = as => [].concat.apply([], as);
 
 // Utility: Create array of length n, and prepopulate with d
 // :: a -> Number -> [a]
-const mkArray = (d, n) => {
-  return Array.apply(null, new Array(n)).map(_ => d);
-};
+const mkArray = (d, n) => Array.apply(null, new Array(n)).map(_ => d);
 
 expect(mkArray(true, 2)).to.be.eql([true, true]);
 expect(mkArray(0, 3)).to.be.eql([0, 0, 0]);
 
-const mkPause = n => { return mkArray(' ', n).join(''); };
+const mkPause = n => mkArray(' ', n).join('');
 expect(mkPause(2)).to.equal('  ');
 
 // Encode a character text into morse.
 // :: String[1] -> String
-const encodeLetter = c => { return table[c]; };
+const encodeLetter = c => table[c];
 
 expect(encodeLetter('a')).to.equal('.-');
 
@@ -187,8 +183,8 @@ const signal = exports.signal = s => {
   const on = '1';
 
   // A little macro-ish like helper
-  const sep0 = n => { return mkArray(off, n).join(''); };
-  const sep1 = n => { return mkArray(on, n).join(''); };
+  const sep0 = n => mkArray(off, n).join('');
+  const sep1 = n => mkArray(on, n).join('');
 
   const wordSep = sep0(wordDotRatio);
   const letterSep = sep0(letterDotRatio);
