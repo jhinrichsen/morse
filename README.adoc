@@ -4,8 +4,7 @@ image::https://img.shields.io/badge/ES-2015-brightgreen.svg[ES2015, link="http:/
 
 image::https://img.shields.io/travis/jhinrichsen/morse.svg[Travis build status, link="https://travis-ci.org/jhinrichsen/morse"]
 
-image::https://www.bithound.io/github/jhinrichsen/morse/badges/score.svg[bithound,
-link="https://www.bithound.io/github/jhinrichsen/morse"]
+image::https://www.bithound.io/github/jhinrichsen/morse/badges/score.svg[bithound, link="https://www.bithound.io/github/jhinrichsen/morse"]
 
 Implements ITU M.1677 : International Morse code.
 
