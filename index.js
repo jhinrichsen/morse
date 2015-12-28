@@ -129,9 +129,6 @@ const mkArray = (d, n) => Array.apply(null, new Array(n)).map(_ => d);
 expect(mkArray(true, 2)).to.be.eql([true, true]);
 expect(mkArray(0, 3)).to.be.eql([0, 0, 0]);
 
-const mkPause = n => mkArray(' ', n).join('');
-expect(mkPause(2)).to.equal('  ');
-
 // Encode a character text into morse.
 // :: String[1] -> String
 const encodeLetter = c => table[c];
@@ -148,9 +145,9 @@ const encode = exports.encode = s => {
       return s
         .split('')
         .map(letter => table[letter])
-        .join(mkPause(1));
+        .join(' '.repeat(letterDotRatio));
     })
-    .join(mkPause(3));
+    .join(' '.repeat(wordDotRatio));
 };
 
 ////////////////////////////////////////////////////////////////////////////////
