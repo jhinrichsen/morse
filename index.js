@@ -172,7 +172,7 @@ const signal = exports.signal = s => {
         })
         .join(pause.repeat(letterDotRatio));
     })
-    .join(pause.repeat(wordDotRatio))
+    .join(pause.repeat(wordDotRatio));
 };
 
 // Map "0" -> false, "1" -> true
