@@ -118,25 +118,30 @@ const letterDotRatio = 3;
 // 2.4: The space between two words is equal to seven dots.
 const wordDotRatio = 7;
 
-// Encode a character text into morse.
-// :: String[1] -> String
-const encodeLetter = c => table[c];
-
 // Encode text into morse.
 // TODO Using a String is suboptimal, because it hardcodes the underlying buffer
 // resp. transport representation (could be file based, stream based, ...).
 // :: String -> String
 const encode = exports.encode = s => {
+  const pause = ' ';
   return s
     .toLowerCase()
     .split(' ')
     .map(word => {
-      return s
+      return word
         .split('')
-        .map(letter => table[letter])
-        .join(' '.repeat(letterDotRatio));
+        .map(letter => {
+          return table[letter]
+          .split('')
+          .map(symbol => {
+            // Identity mapper
+            return symbol;
+          })
+          .join(pause.repeat(symbolDotRatio));
+        })
+        .join(pause.repeat(letterDotRatio));
     })
-    .join(' '.repeat(wordDotRatio));
+    .join(pause.repeat(wordDotRatio));
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -159,37 +164,27 @@ const signal = exports.signal = s => {
   // on characters '0' and '1'.
   const off = '0';
   const on = '1';
+  const pause = '0';
 
-  // A little macro-ish like helper
-  const sep0 = n => off.repeat(n);
-  const sep1 = n => on.repeat(n);
-
-  const wordSep = sep0(wordDotRatio);
-  const letterSep = sep0(letterDotRatio);
-  const symbolSep = sep0(symbolDotRatio);
-
-  const dah = sep1(dashDotRatio);
-  const dit = sep1(1);
+  const dit = on.repeat(1);
+  const dah = on.repeat(dashDotRatio);
   return s
     .toLowerCase()
     .split(' ')
     .map(word => {
-      // console.log('* Word: ' + word);
       return word
         .split('')
         .map(letter => {
-          // console.log('* * Letter: ' + letter);
-          return encodeLetter(letter)
+          return table[letter]
             .split('')
             .map(symbol => {
-              // console.log('* * * Symbol: ' + symbol);
               return (isDah(symbol) ? dah : dit);
             })
-            .join(symbolSep);
+            .join(pause.repeat(symbolDotRatio));
         })
-        .join(letterSep);
+        .join(pause.repeat(letterDotRatio));
     })
-    .join(wordSep)
+    .join(pause.repeat(wordDotRatio))
     .split('')
     .map(c => { return c === on ? true : false; });
 };

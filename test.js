@@ -9,11 +9,13 @@ describe('morse', function () {
         function () {
       expect(morse.encode('morse code'))
         .to
-        .equal('-- --- .-. ... .   -.-. --- -.. .');
+        .equal('- -   - - -   . - .   . . .   .       - . - .   ' +
+          '- - -   - . .   .');
       expect(morse.encode('FREIE ENZYKLOPAEDIE'))
           .to
-          .equal('..-. .-. . .. .   . -. --.. -.-- -.- .-.. --- .--. .- . ' +
-              '-.. .. .');
+          .equal('. . - .   . - .   .   . .   .       .   - .   - - ' +
+            '. .   - . - -   - . -   . - . .   - - -   . - - .   . -' +
+            '   .   - . .   . .   .');
     });
   });
   describe('#signal()', function () {
