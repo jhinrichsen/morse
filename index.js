@@ -136,19 +136,6 @@ expect(mkPause(2)).to.equal('  ');
 // :: String[1] -> String
 const encodeLetter = c => table[c];
 
-expect(encodeLetter('a')).to.equal('.-');
-
-// Encode a word into morse.
-// :: String -> String
-const encodeWord = s => {
-  return s
-    .split('')
-    .map(encodeLetter)
-    .join(mkPause(1));
-};
-
-expect(encodeWord('ee')).to.equal('. .');
-
 // Encode text into morse.
 // TODO Using a String is suboptimal, because it hardcodes the underlying buffer
 // resp. transport representation (could be file based, stream based, ...).
@@ -157,7 +144,12 @@ const encode = exports.encode = s => {
   return s
     .toLowerCase()
     .split(' ')
-    .map(encodeWord)
+    .map(word => {
+      return s
+        .split('')
+        .map(letter => table[letter])
+        .join(mkPause(1));
+    })
     .join(mkPause(3));
 };
 
