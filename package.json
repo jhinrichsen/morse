@@ -1,6 +1,6 @@
 {
   "name": "@jhinrichsen/morse",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Morse Code",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
     "mocha": "^2.3.4"
   },
   "dependencies": {
-    "chai": "^3.4.1"
+    "chai": "^3.4.1",
+    "curry": "^1.2.0"
   }
 }

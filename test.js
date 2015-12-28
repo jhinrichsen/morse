@@ -5,14 +5,14 @@ const expect = require('chai').expect;
 const morse = require('./index');
 
 describe('morse', function () {
-  describe('#encode()', function () {
+  describe('#code()', function () {
     it('should return the proper morse code in . and - notation', 
         function () {
-      expect(morse.encode('morse code'))
+      expect(morse.code('morse code'))
         .to
         .equal('- -   - - -   . - .   . . .   .       - . - .   ' +
           '- - -   - . .   .');
-      expect(morse.encode('FREIE ENZYKLOPAEDIE'))
+      expect(morse.code('FREIE ENZYKLOPAEDIE'))
           .to
           .equal('. . - .   . - .   .   . .   .       .   - .   - - ' +
             '. .   - . - -   - . -   . - . .   - - -   . - - .   . -' +
