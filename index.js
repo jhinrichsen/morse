@@ -118,17 +118,6 @@ const letterDotRatio = 3;
 // 2.4: The space between two words is equal to seven dots.
 const wordDotRatio = 7;
 
-// Utility: Flatten array
-// :: [a] -> [b]
-const flatten = as => [].concat.apply([], as);
-
-// Utility: Create array of length n, and prepopulate with d
-// :: a -> Number -> [a]
-const mkArray = (d, n) => Array.apply(null, new Array(n)).map(_ => d);
-
-expect(mkArray(true, 2)).to.be.eql([true, true]);
-expect(mkArray(0, 3)).to.be.eql([0, 0, 0]);
-
 // Encode a character text into morse.
 // :: String[1] -> String
 const encodeLetter = c => table[c];
@@ -172,8 +161,8 @@ const signal = exports.signal = s => {
   const on = '1';
 
   // A little macro-ish like helper
-  const sep0 = n => mkArray(off, n).join('');
-  const sep1 = n => mkArray(on, n).join('');
+  const sep0 = n => off.repeat(n);
+  const sep1 = n => on.repeat(n);
 
   const wordSep = sep0(wordDotRatio);
   const letterSep = sep0(letterDotRatio);
