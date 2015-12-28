@@ -150,14 +150,8 @@ const encode = exports.encode = s => {
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-// Map true -> '=' and false -> '_'
-// :: Boolean -> Character
-const wikipediaNotation = a => { return a ? '=' : '_'; };
-
-expect(wikipediaNotation([ true, true, false ])).to.eql('=', '_', '=');
-
-// Convert a text into a signal (on/ off).
-// :: String -> [Boolean]
+// Convert a text into a signal, a series of "0" and "1".
+// :: String -> String
 const signal = exports.signal = s => {
   // ECMAScripts Array.prototype.join() does not offer anything other than
   // Strings, so instead of boolean true and false the implementation is based
@@ -185,15 +179,16 @@ const signal = exports.signal = s => {
         .join(pause.repeat(letterDotRatio));
     })
     .join(pause.repeat(wordDotRatio))
-    .split('')
-    .map(c => { return c === on ? true : false; });
 };
 
-expect(signal('morse code')
-    .map(wikipediaNotation)
-    .join(''))
-  .to
-  .equal('===_===___===_===_===___=_===_=___=_=_=___=_______' +
-      '===_=_===_=___===_===_===___===_=_=___=');
+// Map "0" -> false, "1" -> true
+// :: Character -> Boolean
+const toBinary = exports.toBinary = n => +n;
+
+// Map '1' to '=' and '0' to '_'
+// :: Character -> Character
+const toWikipediaNotation = 
+  exports.toWikipediaNotation = 
+  a => toBinary(a) ? '=' : '_';
 
 // EOF
