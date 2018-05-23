@@ -1,10 +1,12 @@
 package morse
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestIcuTableE(t *testing.T) {
 	want := "."
-	got := icuTable["e"]
+	got := icuTable['e']
 	if want != got {
 		t.Errorf("want %s but got %s\n", want, got)
 	}
@@ -12,7 +14,7 @@ func TestIcuTableE(t *testing.T) {
 
 func TestIcuTable7(t *testing.T) {
 	want := "--..."
-	got := icuTable["7"]
+	got := icuTable['7']
 	if want != got {
 		t.Errorf("want %s but got %s\n", want, got)
 	}
@@ -64,6 +66,6 @@ func TestWikipediaNotation(t *testing.T) {
 		got += string(WikipediaNotation(r))
 	}
 	if want != got {
-		t.Errorf("want %s but got %s\n", want, got)
+		t.Errorf("\nwant: %s\ngot:  %s\n", want, got)
 	}
 }
