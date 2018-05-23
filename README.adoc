@@ -4,12 +4,7 @@ image::https://img.shields.io/badge/ES-2015-brightgreen.svg[ES2015, link="http:/
 
 image::https://img.shields.io/travis/jhinrichsen/morse.svg[Travis build status, link="https://travis-ci.org/jhinrichsen/morse"]
 
-image::https://www.bithound.io/github/jhinrichsen/morse/badges/score.svg[bithound, link="https://www.bithound.io/github/jhinrichsen/morse"]
-
-
 Implements ITU M.1677 : International Morse code.
-
-Work in progress. Your mileage may vary.
 
 === Why yet another Morse library?
 
@@ -42,28 +37,13 @@ pulse ---+---+---+---+---+---+---+---+---> t
 
 ==== Prerequisites
 
-- Node.js >= 4.x (ES2015 support)
-- npm
+- Go
 
 === Installation
 
 ----
-npm install @jhinrichsen/morse
+go get github.com/jhinrichsen/morse
 ----
-
-=== Use
-
-----
-const morse = require('@jhinrichsen/morse');
-
-morse.encode('The quick brown fox jumps over the lazy dog'); <1>
-// A String with lots of dots and dashes
-
-morse.signal('The quick brown fox jumps over the lazy dog'); <2>
-// An array with lots of boolean values true and false
-----
-<1> encode :: String -> String
-<2> signal :: String -> [Bool]
 
 === To do list
 
